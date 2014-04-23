@@ -26,7 +26,7 @@ public class HomeScreenActivity extends Activity {
 		
 		setContentView(R.layout.a_homescreen);
 		
-		ListView ListOfNames = (ListView) findViewById(R.id.ListOfNames);
+		ListView ListOfNames = (ListView) findViewById(R.id.listofelementsnames);
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, names);
