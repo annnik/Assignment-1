@@ -7,24 +7,23 @@ import android.content.Intent;
 
 public class SplashScreenActivity extends Activity {
 	
-
+	private static final int timeOfWaiting=2000;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		//getScreenOrientation();
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.a_splashscreen);
 		
-
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				startActivity(new Intent(
-						"com.example.splash_screen.HomeScreenActivity"));
-				
-			}
-		}, 2000);
-
-		
+ 
+		final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+               
+                Intent mInHome = new Intent(SplashScreenActivity.this, HomeScreenActivity.class);
+                SplashScreenActivity.this.startActivity(mInHome);
+                
+            }
+        }, timeOfWaiting);
 
 	}
 

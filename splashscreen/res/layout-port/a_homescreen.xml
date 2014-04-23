@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.splash_screen.MainActivity$PlaceholderFragment" >
+    tools:context="com.example.splash_screen.HomeScreenActivity" >
 
     <TextView
         android:id="@+id/ListText"
@@ -24,7 +24,7 @@
         android:textSize="@dimen/abc_action_bar_default_height" />
 
     <ListView
-        android:id="@+id/ListOfElements"
+        android:id="@+id/ListOfNames"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

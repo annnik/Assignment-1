@@ -8,10 +8,10 @@ import android.widget.ListView;
 
 public class HomeScreenActivity extends Activity {
 
-	String[] names = new String[20];
+	private String[] names = new String[20];
 	
-	void InputArray() {
-		for (int i = 0; i < 20; i++) {
+	private void initNamesArray() {
+		for (int i = 0; i < names.length; i++) {
 			names[i] = "Element #" + String.valueOf(i + 1);
 		}
 	}
@@ -20,11 +20,11 @@ public class HomeScreenActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		InputArray();
-		// TODO com.example.ClearScreen
+		initNamesArray();
+		
 		super.onCreate(savedInstanceState);
 		
-		setContentView(R.layout.a_splashscreen);
+		setContentView(R.layout.a_homescreen);
 		
 		ListView ListOfNames = (ListView) findViewById(R.id.ListOfNames);
 
@@ -32,6 +32,12 @@ public class HomeScreenActivity extends Activity {
 				android.R.layout.simple_list_item_1, names);
 
 		ListOfNames.setAdapter(adapter);
+		
+	}
+	@Override
+	protected void onPause() {
+		 super.onPause();
+		HomeScreenActivity.this.finish();
 		
 	}
 
