@@ -11,25 +11,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.splash_screen.MainActivity$PlaceholderFragment" >
 
+<ImageView
+    android:id="@+id/SplashImage"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:contentDescription="@string/image"
+    android:src="@drawable/im1" />
+    
     <TextView
-        android:id="@+id/ListText"
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="209dp"
-        android:layout_marginTop="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
         android:contentDescription="@string/text"
-        android:text="@string/home"
-        android:textSize="@dimen/abc_action_bar_default_height" />
-
-    <ListView
-        android:id="@+id/ListOfElements"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/ListText"
-        android:layout_marginTop="80dp" >
-    </ListView>
+        android:text="@string/app_name"
+        android:textSize="42sp" />
 
 </RelativeLayout>

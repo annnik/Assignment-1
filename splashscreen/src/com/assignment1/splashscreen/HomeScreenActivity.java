@@ -1,7 +1,7 @@
-package com.example.splash_screen;
+package com.assignment1.splashscreen;
+
 
 import android.app.Activity;
-//import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -16,32 +16,22 @@ public class HomeScreenActivity extends Activity {
 		}
 	}
 	
-	/*@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-
-		super.onConfigurationChanged(newConfig);
-		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-			setContentView(R.layout.a_splash);
-	    } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-	    	setContentView(R.layout.a_splash);
-	    }
-		
-	}
-	*/
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		InputArray();
 		// TODO com.example.ClearScreen
 		super.onCreate(savedInstanceState);
 		
-		setContentView(R.layout.a_main);
+		setContentView(R.layout.a_splashscreen);
 		
-		ListView ListOfElements = (ListView) findViewById(R.id.ListOfElements);
+		ListView ListOfNames = (ListView) findViewById(R.id.ListOfNames);
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, names);
 
-		ListOfElements.setAdapter(adapter);
+		ListOfNames.setAdapter(adapter);
 		
 	}
 

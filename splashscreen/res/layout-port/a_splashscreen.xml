@@ -11,20 +11,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.splash_screen.MainActivity$PlaceholderFragment" >
 
-    <ImageView
-        android:id="@+id/SplashImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/image"
-        android:src="@drawable/image" />
-
+<ImageView
+    android:id="@+id/SplashImage"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:contentDescription="@string/image"
+    android:src="@drawable/im2" />
+    
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/SplashImage"
-        android:layout_alignLeft="@+id/SplashImage"
-        android:layout_marginLeft="418dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
         android:contentDescription="@string/text"
         android:text="@string/app_name"
         android:textSize="42sp" />
