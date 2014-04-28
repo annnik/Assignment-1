@@ -40,8 +40,7 @@ public class HomeScreenActivity extends Activity {
 
 	}
 	public void onConfigurationChanged(Configuration newConfig) {
-		 super.onConfigurationChanged(newConfig);
-		 HomeScreenActivity.this.finish();
+		 super.onConfigurationChanged(newConfig);		
 		 }
 
 }
