@@ -12,7 +12,7 @@ public class SplashScreenActivity extends Activity {
 	private long start = 0L;
 	private static final int timeOfWaiting = 2000;
 	private boolean orientationFlag = true;
-	final Handler handler = new Handler();
+	private final Handler handler = new Handler();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class SplashScreenActivity extends Activity {
 		setContentView(R.layout.a_splashscreen);
 		if (savedInstanceState != null)
 			orientationFlag = savedInstanceState.getBoolean("orientationFlag");
-		if (orientationFlag) {
+		if ((orientationFlag)&&(timeOfRealWaiting<timeOfWaiting)) {
 			handler.postDelayed(new Runnable() {
 				public void run() {
 					if (start == 0L)
@@ -33,17 +33,34 @@ public class SplashScreenActivity extends Activity {
 					finish();
 
 				}
-			}, timeOfWaiting);
+			}, timeOfWaiting-timeOfRealWaiting);
 		}
-		timeOfRealWaiting = SystemClock.uptimeMillis() - start;
+		else {
+			    Runnable myTask = new Runnable() { 
+				@Override
+				public void run() {					
+					Intent mInHome = new Intent(SplashScreenActivity.this,
+							HomeScreenActivity.class);
+					SplashScreenActivity.this.startActivity(mInHome);
+
+					finish();
+				}
+				}; 
+			
+		}
+		
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		SplashScreenActivity.this.finish();
-
 	}
+	@Override
+	protected void onStop() {
+		super.onStop();
+		
+	}
+	
 
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
@@ -52,6 +69,7 @@ public class SplashScreenActivity extends Activity {
 
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
+		timeOfRealWaiting = SystemClock.uptimeMillis() - start;
 		outState.putBoolean("orientationFlag", false);
 	}
 
