@@ -1,7 +1,6 @@
 package com.assignment1.splashscreen;
 
 import android.app.Activity;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -33,14 +32,5 @@ public class HomeScreenActivity extends Activity {
 
 	}
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-		HomeScreenActivity.this.finish();
-
-	}
-	public void onConfigurationChanged(Configuration newConfig) {
-		 super.onConfigurationChanged(newConfig);		
-		 }
 
 }
