@@ -45,13 +45,11 @@ public class SplashScreenActivity extends Activity {
 			handler.post(runnableActivityStart);
 	}
 
-
-
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		if (startingTime == 0L)
 			startingTime = SystemClock.uptimeMillis();
-		outState.putBoolean("orientationFlag", false);
+
 	}
 
 }
