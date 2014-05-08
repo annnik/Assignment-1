@@ -13,7 +13,7 @@ public class SplashScreenActivity extends Activity {
 	private long activityStartingTimeMilliseconds=0;
 	private long appStartingTimeMilliseconds;
 	private final Handler handler = new Handler();
-	private static final int timeOfWaiting = 10000;
+	private static final int timeOfWaiting = 2000;
 	private static final String TIME_FROM_START = "timeFromStart";
 	private Runnable runnableActivityStart = new Runnable() {
 		public void run() {
