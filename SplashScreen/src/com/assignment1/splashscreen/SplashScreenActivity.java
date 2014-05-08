@@ -10,11 +10,10 @@ public class SplashScreenActivity extends Activity {
 
 	private long timeOfRealWaiting = 0L;
 	private long timeFromStart = 0;
-	private long activityStartingTimeMilliseconds;
+	private long activityStartingTimeMilliseconds=0;
+	private long appStartingTimeMilliseconds;
 	private final Handler handler = new Handler();
 	private static final int timeOfWaiting = 2000;
-	private static final Date appStartingTime = new Date();
-	private static final long appStartingTimeMilliseconds = appStartingTime.getTime();
 	private static final String TIME_FROM_START = "timeFromStart";
 	private Runnable runnableActivityStart = new Runnable() {
 		public void run() {
@@ -27,8 +26,13 @@ public class SplashScreenActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		if (savedInstanceState != null)
+
+		if (appStartingTimeMilliseconds == 0) {
+			appStartingTimeMilliseconds = (new Date()).getTime();
+		}
+		if (savedInstanceState != null) {
 			timeFromStart = savedInstanceState.getLong(TIME_FROM_START);
+		}
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.a_splashscreen);
@@ -45,7 +49,7 @@ public class SplashScreenActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		timeOfRealWaiting = timeOfWaiting - (timeFromStart);
+		timeOfRealWaiting = timeOfWaiting - timeFromStart;
 		if (timeOfRealWaiting > 0) {
 			handler.postDelayed(runnableActivityStart, timeOfRealWaiting);
 		} else
@@ -55,8 +59,7 @@ public class SplashScreenActivity extends Activity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 
-		Date activityStartingTime = new Date();
-		activityStartingTimeMilliseconds = activityStartingTime.getTime();
+		activityStartingTimeMilliseconds = (new Date()).getTime();
 		timeFromStart = activityStartingTimeMilliseconds
 				- appStartingTimeMilliseconds;
 
