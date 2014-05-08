@@ -9,7 +9,7 @@ import java.util.Date;
 public class SplashScreenActivity extends Activity {
 
 	private long timeOfRealWaiting = 0L;
-	private long timeFromStarting = 0;
+	private long timeFromStart = 0;
 	private long activityStartingTimeMilliseconds;
 	private final Handler handler = new Handler();
 	private static final int timeOfWaiting = 2000;
@@ -28,7 +28,7 @@ public class SplashScreenActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		if (savedInstanceState != null)
-			timeFromStarting = savedInstanceState.getLong("timeFromStarting");
+			timeFromStart = savedInstanceState.getLong("timeFromStart");
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.a_splashscreen);
@@ -45,7 +45,7 @@ public class SplashScreenActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		timeOfRealWaiting = timeOfWaiting - (timeFromStarting);
+		timeOfRealWaiting = timeOfWaiting - (timeFromStart);
 		if (timeOfRealWaiting > 0) {
 			handler.postDelayed(runnableActivityStart, timeOfRealWaiting);
 		} else
@@ -57,10 +57,10 @@ public class SplashScreenActivity extends Activity {
 
 		Date activityStartingTime = new Date();
 		activityStartingTimeMilliseconds = activityStartingTime.getTime();
-		timeFromStarting = activityStartingTimeMilliseconds
+		timeFromStart = activityStartingTimeMilliseconds
 				- appStartingTimeMilliseconds;
 
-		outState.putLong("timeFromStarting", timeFromStarting);
+		outState.putLong("timeFromStart", timeFromStart);
 
 		super.onSaveInstanceState(outState);
 	}
