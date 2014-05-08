@@ -46,11 +46,11 @@ public class SplashScreenActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 		long timeOfRealWaitingNEW = 0;
-		if ((appStartingTimeMilliseconds == 0)) {
+		if (appStartingTimeMilliseconds == 0) {
 			appStartingTimeMilliseconds = (new Date()).getTime();
 		}
 
-		timeOfRealWaitingNEW = (-firstActivityStartingTime + appStartingTimeMilliseconds) * 10;
+		timeOfRealWaitingNEW = -firstActivityStartingTime + appStartingTimeMilliseconds;
 
 		if ((timeOfRealWaitingNEW > 0) && (firstActivityStartingTime != 0)) {
 			handler.postDelayed(runnableActivityStart, timeOfWaiting
