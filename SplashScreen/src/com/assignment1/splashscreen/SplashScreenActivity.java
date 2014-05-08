@@ -4,23 +4,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
 import android.content.Intent;
-import java.util.Calendar;
+import java.util.Date;
 
 public class SplashScreenActivity extends Activity {
 
 	private long timeOfRealWaiting = 0L;
-	private int startingTime = 0;
-	private static final int timeOfWaiting = 2000;
+	private long startingTime = 0;
+	private long activityStartingTimeMilliseconds;
 	private final Handler handler = new Handler();
-	private static final Calendar activityStartingTime = Calendar.getInstance();
-	private Calendar timeRightNow;
-	private int timeRightNowMilliseconds;
-	private static final int activityStartingTimeMilliseconds = (activityStartingTime
-			.get(Calendar.SECOND)
-			+ activityStartingTime.get(Calendar.HOUR)
-			* 3600 + activityStartingTime.get(Calendar.MINUTE) * 60)
-			* 1000
-			+ activityStartingTime.get(Calendar.MILLISECOND);;
+	private static final int timeOfWaiting = 10000;
+	private static final Date appStartingTime = new Date();
+	private static final long appStartingTimeMilliseconds = appStartingTime
+			.getTime();
 
 	private Runnable runnableActivityStart = new Runnable() {
 		public void run() {
@@ -34,7 +29,7 @@ public class SplashScreenActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		if (savedInstanceState != null)
-			startingTime = savedInstanceState.getInt("startingTime");
+			startingTime = savedInstanceState.getLong("startingTime");
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.a_splashscreen);
@@ -51,7 +46,6 @@ public class SplashScreenActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-
 		timeOfRealWaiting = timeOfWaiting - (startingTime);
 		if (timeOfRealWaiting > 0) {
 			handler.postDelayed(runnableActivityStart, timeOfRealWaiting);
@@ -62,16 +56,12 @@ public class SplashScreenActivity extends Activity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 
-		timeRightNow = Calendar.getInstance();
-		timeRightNowMilliseconds = (timeRightNow.get(Calendar.SECOND)
-				+ timeRightNow.get(Calendar.HOUR) * 3600 + timeRightNow
-				.get(Calendar.MINUTE) * 60)
-				* 1000
-				+ timeRightNow.get(Calendar.MILLISECOND);
-		startingTime = timeRightNowMilliseconds
-				- activityStartingTimeMilliseconds;
+		Date activityStartingTime = new Date();
+		activityStartingTimeMilliseconds = activityStartingTime.getTime();
+		startingTime = activityStartingTimeMilliseconds
+				- appStartingTimeMilliseconds;
 
-		outState.putInt("startingTime", startingTime);
+		outState.putLong("startingTime", startingTime);
 
 		super.onSaveInstanceState(outState);
 	}
