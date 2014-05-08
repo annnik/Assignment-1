@@ -12,7 +12,7 @@ public class SplashScreenActivity extends Activity {
 	private long timeFromStarting = 0;
 	private long activityStartingTimeMilliseconds;
 	private final Handler handler = new Handler();
-	private static final int timeOfWaiting = 10000;
+	private static final int timeOfWaiting = 2000;
 	private static final Date appStartingTime = new Date();
 	private static final long appStartingTimeMilliseconds = appStartingTime.getTime();
 
@@ -60,7 +60,7 @@ public class SplashScreenActivity extends Activity {
 		timeFromStarting = activityStartingTimeMilliseconds
 				- appStartingTimeMilliseconds;
 
-		outState.putLong("startingTime", timeFromStarting);
+		outState.putLong("timeFromStarting", timeFromStarting);
 
 		super.onSaveInstanceState(outState);
 	}
