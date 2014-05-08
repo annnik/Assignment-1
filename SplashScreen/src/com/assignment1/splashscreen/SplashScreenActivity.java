@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class SplashScreenActivity extends Activity {
 
-	private long firstActivityStartingTime = 0;
+	private long timeRightNow = 0;
 	private long appStartingTimeMilliseconds = 0;
 	private final Handler handler = new Handler();
 	private static final int timeOfWaiting = 10000;
@@ -45,21 +45,21 @@ public class SplashScreenActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		long timeOfRealWaitingNEW = 0;
-		firstActivityStartingTime = (new Date()).getTime();
+		long timeOfRealWaiting = 0;
+		timeRightNow = (new Date()).getTime();
 		
 
-		timeOfRealWaitingNEW = firstActivityStartingTime
+		timeOfRealWaiting = timeRightNow
 				- appStartingTimeMilliseconds;
-		if (timeOfRealWaitingNEW > 0) {
+		if (timeOfRealWaiting > 0) {
 			if (appStartingTimeMilliseconds != 0) {
 				handler.postDelayed(runnableActivityStart, timeOfWaiting
-						- timeOfRealWaitingNEW);
+						- timeOfRealWaiting);
 			} else {
 				handler.postDelayed(runnableActivityStart, timeOfWaiting);
 			}
 		} else {
-			if (timeOfRealWaitingNEW < 0) {
+			if (timeOfRealWaiting < 0) {
 				handler.post(runnableActivityStart);
 			}
 		}
