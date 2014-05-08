@@ -11,7 +11,7 @@ public class SplashScreenActivity extends Activity {
 	private long firstActivityStartingTime = 0;
 	private long appStartingTimeMilliseconds = 0;
 	private final Handler handler = new Handler();
-	private static final int timeOfWaiting = 2000;
+	private static final int timeOfWaiting = 10000;
 	private static final String FIRST_ACTIVITY_START = "firstActivityStart";
 	private Runnable runnableActivityStart = new Runnable() {
 		public void run() {
@@ -46,17 +46,19 @@ public class SplashScreenActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 		long timeOfRealWaitingNEW = 0;
-		if (appStartingTimeMilliseconds == 0) {
+		if ((appStartingTimeMilliseconds == 0)&&(firstActivityStartingTime==0)) {
 			appStartingTimeMilliseconds = (new Date()).getTime();
 		}
 
-		timeOfRealWaitingNEW = -firstActivityStartingTime + appStartingTimeMilliseconds;
-
-		if ((timeOfRealWaitingNEW > 0) && (firstActivityStartingTime != 0)) {
-			handler.postDelayed(runnableActivityStart, timeOfWaiting
-					- timeOfRealWaitingNEW);
-		} else if (firstActivityStartingTime == 0) {
-			handler.postDelayed(runnableActivityStart, timeOfWaiting);
+		timeOfRealWaitingNEW = -firstActivityStartingTime
+				+ appStartingTimeMilliseconds;
+		if (timeOfRealWaitingNEW > 0) {
+			if (firstActivityStartingTime != 0) {
+				handler.postDelayed(runnableActivityStart, timeOfWaiting
+						- timeOfRealWaitingNEW);
+			} else {
+				handler.postDelayed(runnableActivityStart, timeOfWaiting);
+			}
 		} else {
 			handler.post(runnableActivityStart);
 		}
