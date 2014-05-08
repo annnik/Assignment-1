@@ -15,7 +15,7 @@ public class SplashScreenActivity extends Activity {
 	private static final int timeOfWaiting = 2000;
 	private static final Date appStartingTime = new Date();
 	private static final long appStartingTimeMilliseconds = appStartingTime.getTime();
-
+	private static final String TIME_FROM_START = "timeFromStart";
 	private Runnable runnableActivityStart = new Runnable() {
 		public void run() {
 			Intent mInHome = new Intent(SplashScreenActivity.this,
@@ -28,7 +28,7 @@ public class SplashScreenActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		if (savedInstanceState != null)
-			timeFromStart = savedInstanceState.getLong("timeFromStart");
+			timeFromStart = savedInstanceState.getLong(TIME_FROM_START);
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.a_splashscreen);
@@ -60,7 +60,7 @@ public class SplashScreenActivity extends Activity {
 		timeFromStart = activityStartingTimeMilliseconds
 				- appStartingTimeMilliseconds;
 
-		outState.putLong("timeFromStart", timeFromStart);
+		outState.putLong(TIME_FROM_START, timeFromStart);
 
 		super.onSaveInstanceState(outState);
 	}
