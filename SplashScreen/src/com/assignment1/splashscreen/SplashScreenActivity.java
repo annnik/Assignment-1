@@ -8,13 +8,11 @@ import java.util.Date;
 
 public class SplashScreenActivity extends Activity {
 
-	private long timeOfRealWaiting = 0L;
-	private long timeFromStart = 0;
-	private long activityStartingTimeMilliseconds=0;
-	private long appStartingTimeMilliseconds;
+	private long firstActivityStartingTime = 0;
+	private long appStartingTimeMilliseconds = 0;
 	private final Handler handler = new Handler();
 	private static final int timeOfWaiting = 2000;
-	private static final String TIME_FROM_START = "timeFromStart";
+	private static final String FIRST_ACTIVITY_START = "firstActivityStart";
 	private Runnable runnableActivityStart = new Runnable() {
 		public void run() {
 			Intent mInHome = new Intent(SplashScreenActivity.this,
@@ -26,14 +24,12 @@ public class SplashScreenActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
-		if (savedInstanceState == null){
-			appStartingTimeMilliseconds = (new Date()).getTime();
-		}
-		if (savedInstanceState != null) {
-			timeFromStart = savedInstanceState.getLong(TIME_FROM_START);
-		}
 		super.onCreate(savedInstanceState);
+
+		if (savedInstanceState != null) {
+			firstActivityStartingTime = savedInstanceState
+					.getLong(FIRST_ACTIVITY_START);
+		}
 
 		setContentView(R.layout.a_splashscreen);
 
@@ -49,21 +45,29 @@ public class SplashScreenActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		timeOfRealWaiting = timeOfWaiting - timeFromStart;
-		if (timeOfRealWaiting > 0) {
-			handler.postDelayed(runnableActivityStart, timeOfRealWaiting);
-		} else
+		long timeOfRealWaitingNEW = 0;
+		if ((appStartingTimeMilliseconds == 0)) {
+			appStartingTimeMilliseconds = (new Date()).getTime();
+		}
+
+		timeOfRealWaitingNEW = (-firstActivityStartingTime + appStartingTimeMilliseconds) * 10;
+
+		if ((timeOfRealWaitingNEW > 0) && (firstActivityStartingTime != 0)) {
+			handler.postDelayed(runnableActivityStart, timeOfWaiting
+					- timeOfRealWaitingNEW);
+		} else if (firstActivityStartingTime == 0) {
+			handler.postDelayed(runnableActivityStart, timeOfWaiting);
+		} else {
 			handler.post(runnableActivityStart);
+		}
 	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 
-		activityStartingTimeMilliseconds = (new Date()).getTime();
-		timeFromStart = activityStartingTimeMilliseconds
-				- appStartingTimeMilliseconds;
+		firstActivityStartingTime = (new Date()).getTime();
 
-		outState.putLong(TIME_FROM_START, timeFromStart);
+		outState.putLong(FIRST_ACTIVITY_START, firstActivityStartingTime);
 
 		super.onSaveInstanceState(outState);
 	}
