@@ -32,8 +32,9 @@ public class SplashScreenActivity extends Activity {
 			if (firstActivityStartingTime == 0) {
 				firstActivityStartingTime = (new Date()).getTime();
 			}
-		} else
+		} else {
 			firstActivityStartingTime = (new Date()).getTime();
+		}
 
 		setContentView(R.layout.a_splashscreen);
 
