@@ -9,7 +9,7 @@ import java.util.Date;
 public class SplashScreenActivity extends Activity {
 
 	private long firstActivityStartingTime = 0;
-	private long timeRightNow = 0;
+
 	private final Handler handler = new Handler();
 	private static final int timeOfWaiting = 2000;
 	private static final String FIRST_ACTIVITY_START = "firstActivityStart";
@@ -50,13 +50,15 @@ public class SplashScreenActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
+		long timeRightNow = 0;
 		long timeOfRealWaiting = 0;
+		long timeFromStart = 0;
 		timeRightNow = (new Date()).getTime();
-		timeOfRealWaiting = timeRightNow - firstActivityStartingTime;
-		if (timeOfWaiting - timeOfRealWaiting > 0) {
+		timeFromStart = timeRightNow - firstActivityStartingTime;
+		timeOfRealWaiting = timeOfWaiting - timeFromStart;
+		if (timeOfRealWaiting > 0) {
 
-			handler.postDelayed(runnableActivityStart, timeOfWaiting
-					- timeOfRealWaiting);
+			handler.postDelayed(runnableActivityStart, timeOfRealWaiting);
 
 		} else {
 			handler.post(runnableActivityStart);
