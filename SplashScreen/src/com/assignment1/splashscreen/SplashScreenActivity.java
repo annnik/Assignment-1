@@ -32,7 +32,8 @@ public class SplashScreenActivity extends Activity {
 			if (firstActivityStartingTime == 0) {
 				firstActivityStartingTime = (new Date()).getTime();
 			}
-		}
+		} else
+			firstActivityStartingTime = (new Date()).getTime();
 
 		setContentView(R.layout.a_splashscreen);
 
@@ -51,14 +52,11 @@ public class SplashScreenActivity extends Activity {
 		long timeOfRealWaiting = 0;
 		timeRightNow = (new Date()).getTime();
 		timeOfRealWaiting = timeRightNow - firstActivityStartingTime;
+		if ((timeOfWaiting - timeOfRealWaiting) > 0) {
 
-		if (timeOfRealWaiting >= 0) {
-			if (firstActivityStartingTime != 0) {
-				handler.postDelayed(runnableActivityStart, timeOfWaiting
-						- timeOfRealWaiting);
-			} else {
-				handler.postDelayed(runnableActivityStart, timeOfWaiting);
-			}
+			handler.postDelayed(runnableActivityStart, timeOfWaiting
+					- timeOfRealWaiting);
+
 		} else {
 			handler.post(runnableActivityStart);
 		}
